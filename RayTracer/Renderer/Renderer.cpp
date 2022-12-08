@@ -37,14 +37,6 @@ void Renderer::Present()
 
 void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera, int samples)
 {
-	glm::vec3 albedo = {1,0,0};
-
-	// camera / viewport 
-	glm::vec3 lowerLeft{ -2, -1, -1 };
-	glm::vec3 eye{ 0, 0, 0 };
-	glm::vec3 right{ 4, 0, 0 };
-	glm::vec3 up{ 0, 2, 0 };
-
 	for (int y = 0; y < canvas.m_height; y++)
 	{
 		for (int x = 0; x < canvas.m_width; x++)
