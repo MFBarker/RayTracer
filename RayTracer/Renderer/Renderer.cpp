@@ -55,7 +55,7 @@ void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera, int samples)
 
 				// get normalized (0 - 1) u, v coordinates from screen x and y 
 			   // add random value (0-1) to screen x and y for anti-aliasing  
-				glm::vec2 point = glm::vec2{ random01(), random01()} / glm::vec2{canvas.m_width, canvas.m_height};
+				glm::vec2 point = glm::vec2{ x + random01(), y + random01()} / glm::vec2{canvas.m_width, canvas.m_height};
 
 				// flip y 
 				point.y = 1.0f - point.y;
@@ -68,7 +68,7 @@ void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera, int samples)
 				// add trace color value to color 
 				color += scene.Trace(ray, 0.001f, 1000.0f, raycastHit, 5);
 			}
-			color /= samples;
+			color = color / (float)samples;
 			canvas.DrawPoint({ x, y }, color4(color, 1));
 		}
 	}
