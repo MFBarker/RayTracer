@@ -26,7 +26,7 @@ int main(int,char**)
 	Camera camera({ 13, 2, 3 }, { 0, 0, 0 }, { 0, 1, 0 }, fov, width / (float)height);
 
 	Scene scene{ { 0.1f,0.1f,1.0f },{0.9f, 0.9f, 0.9f}};
-	InitScene02(scene);
+	InitScene01(scene);
 
 	while(!quit)
 	{
@@ -67,9 +67,9 @@ void InitScene01(Scene& scene)
 	//light
 	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ 5, 5, 0 }, 1.0f, std::make_unique<Emmisive>(color3{ 40, 40, 40 })));
 	//balls
-	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ 0.5, 0.5f, 0 }, 0.5f, std::make_unique<Lambertian>(color3{ 0, 1, 0 })));
+	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ 0.5, 0.5f, -1 }, 0.5f, std::make_unique<Lambertian>(color3{ 0, 1, 0 })));
 	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ -1, 0.5f, 0 }, 0.5f, std::make_unique<Metal>(color3{ 1, 1, 1 }, 0.1f)));
-	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ -0.5, 0.5f, 1 }, 0.5f, std::make_unique<Dielectric>(color3{ 1, 1, 1 }, 2.0f)));
+	scene.AddObject(std::make_unique<Sphere>(glm::vec3{ -1.5, 0.5f, 1 }, 0.5f, std::make_unique<Dielectric>(color3{ 1, 1, 1 }, 2.0f)));
 	//plane
 	scene.AddObject(std::make_unique<Plane>(glm::vec3{ 0, -0.4f, 0 }, glm::vec3{ 0, 1, 0 }, std::make_unique<Lambertian>(color3{ 0.2f, 0.2f, 0.2f })));
 }

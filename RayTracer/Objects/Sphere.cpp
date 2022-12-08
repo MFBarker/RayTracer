@@ -12,7 +12,7 @@ bool Sphere::Hit(const Ray& ray, float min, float max, RaycastHit& hit)
 
     if (discriminant >= 0)
     {
-        float t = (-b + sqrt(discriminant)) / (2 * a);
+        float t = (-b - sqrt(discriminant)) / (2 * a);
 
         if (t > min && t < max)
         {
@@ -25,7 +25,7 @@ bool Sphere::Hit(const Ray& ray, float min, float max, RaycastHit& hit)
             return true;
         }
 
-        t = (-b - sqrt(discriminant)) / (2 * a);
+        t = (-b + sqrt(discriminant)) / (2 * a);
 
         if (t > min && t < max)
         {
