@@ -12,7 +12,7 @@ int main(int,char**)
 {
 	const int width = 800;
 	const int height = 600;
-	const int samples = 1;
+	const int samples = 50;
 
 	const float fov = 30.0f;
 
@@ -26,7 +26,7 @@ int main(int,char**)
 	Camera camera({ 13, 2, 3 }, { 0, 0, 0 }, { 0, 1, 0 }, fov, width / (float)height);
 
 	Scene scene{ { 0.1f,0.1f,1.0f },{0.9f, 0.9f, 0.9f}};
-	InitScene01(scene);
+	InitScene02(scene);
 
 	while(!quit)
 	{
