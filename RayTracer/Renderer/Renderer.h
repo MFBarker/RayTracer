@@ -5,6 +5,7 @@
 
 class Object;
 class Scene;
+class Camera;
 
 class Renderer
 { 
@@ -17,7 +18,7 @@ public:
 	void CopyCanvas(const Canvas& canvas);
 	void Present();
 
-	void Render(Canvas& canvas, Scene& scene);
+	void Render(Canvas& canvas, Scene& scene, Camera& camera);
 
 	friend class Canvas;
 private:

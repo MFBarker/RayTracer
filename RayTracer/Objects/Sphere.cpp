@@ -38,4 +38,5 @@ bool Sphere::Hit(const Ray& ray, float min, float max, RaycastHit& hit)
             return true;
         }
     }
+    return false;
 }

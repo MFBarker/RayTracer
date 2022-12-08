@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
+
 struct Ray
 {
 	Ray() = default;
