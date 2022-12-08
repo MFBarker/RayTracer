@@ -35,7 +35,7 @@ void Renderer::Present()
 	SDL_RenderPresent(m_renderer);
 }
 
-void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera)
+void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera, int samples)
 {
 	glm::vec3 albedo = {1,0,0};
 
@@ -45,22 +45,30 @@ void Renderer::Render(Canvas& canvas, Scene& scene, Camera& camera)
 	glm::vec3 right{ 4, 0, 0 };
 	glm::vec3 up{ 0, 2, 0 };
 
-	for (int y = 0; y < canvas.GetHeight(); y++)
+	for (int y = 0; y < canvas.m_height; y++)
 	{
-		for (int x = 0; x < canvas.GetWidth(); x++)
+		for (int x = 0; x < canvas.m_width; x++)
 		{
-			// get normalized (0 - 1) u, v coordinates from screnn x and y 
+			color3 color{ 0, 0, 0 };
+			for (int s = 0; s < samples; s++)
+			{
 
-			glm::vec2 point = glm::vec2{ x, y } / glm::vec2{ canvas.m_width, canvas.m_height };
-			// flip y 
-			point.y = 1.0f - point.y;
+				// get normalized (0 - 1) u, v coordinates from screen x and y 
+			   // add random value (0-1) to screen x and y for anti-aliasing  
+				glm::vec2 point = glm::vec2{ random01(), random01()} / glm::vec2{canvas.m_width, canvas.m_height};
 
-			// create ray from camera 
-			Ray ray = camera.PointToRay(point);
+				// flip y 
+				point.y = 1.0f - point.y;
 
-			// cast ray into scene, get color 
-			RaycastHit raycastHit;
-			color3 color = scene.Trace(ray, 0.001f, 1000.0f, raycastHit, 5);
+				// create ray from camera 
+				Ray ray = camera.PointToRay(point);
+
+				// cast ray into scene 
+				RaycastHit raycastHit;
+				// add trace color value to color 
+				color += scene.Trace(ray, 0.001f, 1000.0f, raycastHit, 5);
+			}
+			color /= samples;
 			canvas.DrawPoint({ x, y }, color4(color, 1));
 		}
 	}

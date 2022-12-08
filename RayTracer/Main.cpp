@@ -41,8 +41,7 @@ int main(int,char**)
 
 		// render scene
 		canvas.Clear({0,0,0,1});
-		renderer.Render(canvas, scene, camera);
-		//renderer.Render(canvas, scene, camera, samples);
+		renderer.Render(canvas, scene, camera, samples);
 
 		//static
 		/*for (int i = 0; i < 100000; i++) 
